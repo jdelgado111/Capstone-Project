@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div class="holder" id="app">
         <div class="holder headline">
             Travel Planner
         </div>
@@ -14,6 +14,11 @@
         <div class="holder city">
             <label for="city">Enter city here</label>
             <input type="text" id="city" placeholder="ex: London">
+        </div>
+
+        <div class="holder date">
+            <label for="date">Enter date</label>
+            <input type="date" id="date">
         </div>
 
         <button type="submit" onclick="Client.handleClick(event)">
