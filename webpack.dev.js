@@ -13,6 +13,9 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),  //for clean webpack plugin
         publicPath: "/dist/"    //allows css styling to appear on reload, otherwise doesn't work right
     },
+    devServer: {
+        inline: false,  //Client library won't work without this
+    },
     stats: 'normal',
     module: {
         rules: [

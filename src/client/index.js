@@ -1,8 +1,11 @@
 //import functions
+import { handleClick } from "./js/onClick";
 
+//import styling
 import "./styles/style.scss";
 
 //export functions
+export { handleClick }
 
 /*
 // Global Variables
