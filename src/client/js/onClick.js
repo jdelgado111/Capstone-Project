@@ -95,10 +95,10 @@ async function handleClick(event) {
     const height = pixImage.webformatHeight;
     //console.log(imageUrl);
 
-    updateUI(city, country, daysDifference, day, temp, desc, imageUrl, width, height);
+    updateUI(city, country, daysDifference, endDate, day, temp, desc, imageUrl, width, height);
 }
 
-function updateUI(city, country, daysDifference, day, temp, desc, imageUrl, width, height) {
+function updateUI(city, country, daysDifference, endDate, day, temp, desc, imageUrl, width, height) {
     //destination (city, country)
     const destination = document.getElementById("dest");
     destination.innerHTML =  "Departing to: " + city + ", " + country;
@@ -106,6 +106,10 @@ function updateUI(city, country, daysDifference, day, temp, desc, imageUrl, widt
     //length of trip
     const days = document.getElementById("days");
     days.innerHTML = "Length of trip: " + daysDifference + " days";
+
+    //end date
+    const end = document.getElementById("ending");
+    end.innerHTML = "Ending on: " + (endDate.getMonth()+1) + "/" + (endDate.getDate()+1) + "/" + endDate.getFullYear();
 
     //date
     const date = document.getElementById("date");

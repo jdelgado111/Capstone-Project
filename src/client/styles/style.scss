@@ -106,19 +106,3 @@ footer {
 .hidden {
     display: none;
 }
-
-/* Style for Placeholder Text*/
-::placeholder {
-    /* Firefox, Chrome, Opera */
-    font-family: 'Oswald', sans-serif;
-}
-
-:-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    font-family: 'Oswald', sans-serif;
-}
-
-::-ms-input-placeholder {
-    /* Microsoft Edge */
-    font-family: 'Oswald', sans-serif;
-}
