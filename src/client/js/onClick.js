@@ -9,9 +9,15 @@ async function handleClick(event) {
     const end = document.getElementById("end").value;
     const endDate = new Date(end);
 
-    //calculate days between dates
+    //calculate days between start and end dates
     const timeDifference = endDate.getTime() - startDate.getTime();
     const daysDifference = timeDifference / (1000 * 3600 * 24);
+    console.log("Length of trip: " + daysDifference);
+
+    //calculate days between today and start date
+    const time = startDate.getTime() - today.getTime();
+    const days = time / (1000 * 3600 * 24);
+    console.log("Days between today and start date: " + days);
     
     /* Geonames API */
     console.log("Calling Geonames API");
@@ -24,13 +30,11 @@ async function handleClick(event) {
     //console.log(geoJson);
 
     const geoData = geoJson.geonames[0];
-    //console.log(geoData.countryName);
 
     const lat = geoData.lat;
     const lng = geoData.lng;
     const country = geoData.countryName;
-
-    //TODO: check how near or far date start date is from today: <=7 days is near, >7 days is far
+    //console.log(geoData.countryName);
 
     /* Weatherbit API */
     console.log("Calling Weatherbit API");
@@ -39,22 +43,38 @@ async function handleClick(event) {
     const weatherUrlFar = "https://api.weatherbit.io/v2.0/forecast/daily?&lat="+lat+"&lon="+lng+"&key=";
     const weatherKey = "394d151bb3f448218aab367dcc64e3b3";
 
-    const weatherJson1 = await fetch(weatherUrlNear+weatherKey)
-    .then(res => res.json());
-    //console.log(weatherJson1);
+    //check how near or far date start date is from today: <=7 days is near, >7 days is far
+    let weatherJson;
+    let day;
+    let weatherData;
 
-    const weatherData1 = weatherJson1.data[0];
-    //console.log(weatherData1.temp);
-    const temp = weatherData1.temp;
-    const desc = weatherData1.weather.description;
+    if (days <= 7) {
+        weatherJson = await fetch(weatherUrlNear+weatherKey)
+        .then(res => res.json());
+        //console.log(weatherJson1);
 
-    const weatherJson2 = await fetch(weatherUrlFar+weatherKey)
-    .then(res => res.json());
-    //console.log(weatherJson2);
+        weatherData = weatherJson.data[0];
+        day = today;
+    }
+    else {
+        weatherJson = await fetch(weatherUrlFar+weatherKey)
+        .then(res => res.json());
+        //console.log(weatherJson);
 
-    const weatherData2 = weatherJson2.data[0];
-    //console.log(weatherData2.temp);
-    const day = weatherData1.valid_date;
+        //get weather for the date the trip starts if less than 16 days away
+        let weatherDay = weatherJson.data[0];
+
+        if (days<16) {
+            weatherData = weatherJson.data[Math.round(days)+1];
+            weatherDay = weatherData.valid_date;
+        }
+        
+        day = new Date(weatherDay);
+        console.log("Date from API: " + day);
+    }
+    //console.log(weatherData.temp);
+    const temp = weatherData.temp;
+    const desc = weatherData.weather.description;
 
     /* Pixabay API */
     console.log("Calling Pixabay API");
@@ -75,7 +95,7 @@ async function handleClick(event) {
     const height = pixImage.webformatHeight;
     //console.log(imageUrl);
 
-    updateUI(city, country, daysDifference, today, temp, desc, imageUrl, width, height);
+    updateUI(city, country, daysDifference, day, temp, desc, imageUrl, width, height);
 }
 
 function updateUI(city, country, daysDifference, day, temp, desc, imageUrl, width, height) {
