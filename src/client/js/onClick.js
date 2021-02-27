@@ -1,4 +1,6 @@
 async function handleClick(event) {
+    const today = new Date();
+
     const city = document.getElementById("city").value;
     
     const start = document.getElementById("start").value;
@@ -28,7 +30,7 @@ async function handleClick(event) {
     const lng = geoData.lng;
     const country = geoData.countryName;
 
-    //TODO: check how near or far date is from today: <=7 days is near, >7 days is far
+    //TODO: check how near or far date start date is from today: <=7 days is near, >7 days is far
 
     /* Weatherbit API */
     console.log("Calling Weatherbit API");
@@ -73,10 +75,10 @@ async function handleClick(event) {
     const height = pixImage.webformatHeight;
     //console.log(imageUrl);
 
-    updateUI(city, country, daysDifference, temp, desc, imageUrl, width, height);
+    updateUI(city, country, daysDifference, today, temp, desc, imageUrl, width, height);
 }
 
-function updateUI(city, country, daysDifference, temp, desc, imageUrl, width, height) {
+function updateUI(city, country, daysDifference, day, temp, desc, imageUrl, width, height) {
     //destination (city, country)
     const destination = document.getElementById("dest");
     destination.innerHTML =  "Departing to: " + city + ", " + country;
@@ -84,6 +86,10 @@ function updateUI(city, country, daysDifference, temp, desc, imageUrl, width, he
     //length of trip
     const days = document.getElementById("days");
     days.innerHTML = "Length of trip: " + daysDifference + " days";
+
+    //date
+    const date = document.getElementById("date");
+    date.innerHTML = (day.getMonth()+1) + "/" + day.getDate();
 
     //temp
     const temperature = document.getElementById("temp");
