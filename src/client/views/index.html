@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-    <meta charset="UTF-8">
-    <title>Capstone Project</title>
-</head>
+        <meta charset="UTF-8">
+        <title>Capstone Project</title>
+    </head>
 
-<body>
-    <div class="holder" id="app">
-        <div class="holder headline">
+    <body>
+        <header class="holder">
             Travel Planner
+        </header>
+
+        <div class="bg">
+            <section class="holder">
+                <div class="holder">
+                    <label for="city">Enter city</label>
+                    <input type="text" id="city" placeholder="ex: London">
+                </div>
+
+                <div class="holder">
+                    <label for="start">Enter start date</label>
+                    <input type="date" id="start">
+                </div>
+
+                <div class="holder">
+                    <label for="end">Enter end date</label>
+                    <input type="date" id="end">
+                </div>
+
+                <button type="submit" onclick="Client.handleClick(event)">
+                    Submit
+                </button>
+            </section>
+
+            <section class="bottom hidden" id="bottom">
+                <div class="holder results">
+                    <div id="dest"></div>
+                    <div id="days"></div>
+
+                    <div class=weather>
+                        <div id="date"></div>
+                        <div id="temp"></div>
+                        <div id="desc"></div>
+                    </div>
+                </div>
+
+                <div class="holder image">
+                    <img id="image">
+                </div>
+            </section>
         </div>
 
-        <div class="holder city">
-            <label for="city">Enter city here</label>
-            <input type="text" id="city" placeholder="ex: London">
-        </div>
-
-        <div class="holder date">
-            <label for="date">Enter date</label>
-            <input type="date" id="date">
-        </div>
-
-        <button type="submit" onclick="Client.handleClick(event)">
-            Submit
-        </button>
-        
-        <div class="holder results">
-        </div>
-    </div>
-
-    <img id="image">
-
-</body></html>
+        <footer>Powered by <a href="">Geonames</a>, <a href="">Weatherbit</a>, and <a href="">Pixabay</a> API</footer>
+    </body>
+</html>

@@ -1,28 +1,27 @@
-:root {
-    --text-color: #A54657;
-}
-
 body {
     display: flex;
-    justify-content: center;
-    background: #F7F0F5;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    flex-direction: column;
+    grid-gap: 1em;
+    font-family: 'Oswald', sans-serif;
 }
 
-#app {
+.bg {
+    background-color: #ffe8d1;
+    border-top: 25px double white;
+    border-bottom: 25px double white;
+}
+
+section {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2vh;
+}
+
+.bottom {
     justify-content: center;
-    align-items: stretch;
-    grid-gap: 1em;
-    height: 95vh;
-    width: 100vh;
-    border-radius: 45px;
-    box-shadow: 1px 1px 15px 1px #3b4a6b;
-    background: white;
-    color: var(--text-color);
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+    grid-gap: 15em;
+    margin-top: 10vh;
 }
 
 .holder {
@@ -32,104 +31,90 @@ body {
     align-items: center;
 }
 
-.duo {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-    grid-gap: 1em;
+header {
+    padding-top: 2vh;
+    font-size: 65px;
 }
 
-.empty::placeholder {
-    color: red;
-}
-
-.entry {
-    /*background: rgba(59, 74, 107, .4);*/
-    margin-top: 15px;
-    box-shadow: 1px 1px 5px 0.1px #55868C;
-    font-size: 18px;
-}
-
-#entryHolder {
-    width: 400px;
-    padding: 10px;
-}
-
-#content {
-    overflow-wrap: break-word;
-}
-
-.headline {
-    font-size: 45px;
-}
-
-/*  Basic Styling To Override Default For Basic HTML Elements */
 label {
     display: block;
-    font-size: 25px;
+    font-size: 18px;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
 }
 
 input {
     display: block;
-    height: 60px;
-    width: 320px;
-    background: floralwhite;
-    color: var(--text-color);
-    font-size: 20px;
+    height: 30px;
+    width: 280px;
+    font-size: 18px;
     font-family: 'Oswald', sans-serif;
     border: 1px solid black;
 }
 
 button {
-    width: 400px;
-    height: 100px;
-    background: #55868C;
-    color: beige;
-    font-size: 26px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-    box-shadow: 2px 4px 5px #444;
-    margin-top: 5px;
-}
-
-h1 {
-    font-size: 36px;
-}
-
-textarea {
-    background: floralwhite;
-    color: var(--text-color);
+    height: 50px;
+    width: 280px;
+    background: #6be0ef;
     font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 4px 5px #444;
+    margin-top: 2vh;
 }
 
-/* Reset style for HTML element on active to have no border*/
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
+.results {
+    grid-gap: 1.5em;
+    font-size: 22px;
+}
+
+.weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 2em;
+    height: 30vh;
+    width: 23vh;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px 1px #3b4a6b;
+    background-color: white;
+    border: 10px double #6be0ef;
+}
+
+#temp {
+    font-size: 30px;
+}
+
+#condition {
+    font-size: 18px;
+    word-wrap: break-word;
+}
+
+img {
+    border-radius: 15px;
+}
+
+footer {
+    padding: 5px;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Style for Placeholder Text*/
 ::placeholder {
     /* Firefox, Chrome, Opera */
-    color: var(--text-color);
     font-family: 'Oswald', sans-serif;
-
 }
 
 :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: var(--text-color);
     font-family: 'Oswald', sans-serif;
-
 }
 
 ::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: var(--text-color);
     font-family: 'Oswald', sans-serif;
-
 }
