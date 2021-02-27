@@ -1,4 +1,16 @@
 async function handleClick(event) {
+    /****REPLACE THIS API KEY****/
+    const geoKey = "jdelgado";
+    /****REPLACE THIS API KEY****/
+
+    /****REPLACE THIS API KEY****/
+    const weatherKey = "394d151bb3f448218aab367dcc64e3b3";
+    /****REPLACE THIS API KEY****/
+
+    /****REPLACE THIS API KEY****/
+    const pixKey = "20428715-b760a9bb313f215d3de7b519e";
+    /****REPLACE THIS API KEY****/
+
     const today = new Date();
 
     const city = document.getElementById("city").value;
@@ -12,18 +24,17 @@ async function handleClick(event) {
     //calculate days between start and end dates
     const timeDifference = endDate.getTime() - startDate.getTime();
     const daysDifference = timeDifference / (1000 * 3600 * 24);
-    console.log("Length of trip: " + daysDifference);
+    //console.log("Length of trip: " + daysDifference);
 
     //calculate days between today and start date
     const time = startDate.getTime() - today.getTime();
     const days = time / (1000 * 3600 * 24);
-    console.log("Days between today and start date: " + days);
+    //console.log("Days between today and start date: " + days);
     
     /* Geonames API */
     console.log("Calling Geonames API");
 
     const geoUrl = "http://api.geonames.org/searchJSON?q="+city+"&maxRows=1&username=";
-    const geoKey = "jdelgado";
 
     const geoJson = await fetch(geoUrl+geoKey)
     .then(res => res.json());
@@ -41,7 +52,6 @@ async function handleClick(event) {
 
     const weatherUrlNear = "http://api.weatherbit.io/v2.0/current?&lat="+lat+"&lon="+lng+"&key=";
     const weatherUrlFar = "https://api.weatherbit.io/v2.0/forecast/daily?&lat="+lat+"&lon="+lng+"&key=";
-    const weatherKey = "394d151bb3f448218aab367dcc64e3b3";
 
     //check how near or far date start date is from today: <=7 days is near, >7 days is far
     let weatherJson;
@@ -79,7 +89,6 @@ async function handleClick(event) {
     /* Pixabay API */
     console.log("Calling Pixabay API");
 
-    const pixKey = "20428715-b760a9bb313f215d3de7b519e";
     const pixUrl = "https://pixabay.com/api/?key="+pixKey+"&q="+country+"&image_type=photo&category=places&safesearch=true";
 
     //console.log(pixUrl);
