@@ -1,16 +1,4 @@
 async function handleClick(event) {
-    /****REPLACE THIS API KEY****/
-    const geoKey = "jdelgado";
-    /****REPLACE THIS API KEY****/
-
-    /****REPLACE THIS API KEY****/
-    const weatherKey = "394d151bb3f448218aab367dcc64e3b3";
-    /****REPLACE THIS API KEY****/
-
-    /****REPLACE THIS API KEY****/
-    const pixKey = "20428715-b760a9bb313f215d3de7b519e";
-    /****REPLACE THIS API KEY****/
-
     const today = new Date();
 
     const city = document.getElementById("city").value;
@@ -31,12 +19,11 @@ async function handleClick(event) {
     const days = time / (1000 * 3600 * 24);
     //console.log("Days between today and start date: " + days);
     
-    /* Geonames API */
+
+    /*** Geonames API ***/
     console.log("Calling Geonames API");
 
-    const geoUrl = "http://api.geonames.org/searchJSON?q="+city+"&maxRows=1&username=";
-
-    const geoJson = await fetch(geoUrl+geoKey)
+    const geoJson = await fetch(`/geo/${city}`)
     .then(res => res.json());
     //console.log(geoJson);
 
@@ -47,19 +34,17 @@ async function handleClick(event) {
     const country = geoData.countryName;
     //console.log(geoData.countryName);
 
-    /* Weatherbit API */
+
+    /*** Weatherbit API ***/
     console.log("Calling Weatherbit API");
 
-    const weatherUrlNear = "http://api.weatherbit.io/v2.0/current?&lat="+lat+"&lon="+lng+"&key=";
-    const weatherUrlFar = "https://api.weatherbit.io/v2.0/forecast/daily?&lat="+lat+"&lon="+lng+"&key=";
-
-    //check how near or far date start date is from today: <=7 days is near, >7 days is far
+    //check how near or far start date is from today: <=7 days is near, >7 days is far
     let weatherJson;
     let day;
     let weatherData;
 
     if (days <= 7) {
-        weatherJson = await fetch(weatherUrlNear+weatherKey)
+        weatherJson = await fetch(`/weather/near/${lat}/${lng}`)
         .then(res => res.json());
         //console.log(weatherJson1);
 
@@ -67,33 +52,31 @@ async function handleClick(event) {
         day = today;
     }
     else {
-        weatherJson = await fetch(weatherUrlFar+weatherKey)
+        weatherJson = await fetch(`/weather/far/${lat}/${lng}`)
         .then(res => res.json());
         //console.log(weatherJson);
 
         //get weather for the date the trip starts if less than 16 days away
         let weatherDay = weatherJson.data[0];
+        day = today;
 
         if (days<16) {
             weatherData = weatherJson.data[Math.round(days)+1];
             weatherDay = weatherData.valid_date;
+            day = new Date(weatherDay);
         }
         
-        day = new Date(weatherDay);
         console.log("Date from API: " + day);
     }
     //console.log(weatherData.temp);
     const temp = weatherData.temp;
     const desc = weatherData.weather.description;
 
-    /* Pixabay API */
+
+    /*** Pixabay API ***/
     console.log("Calling Pixabay API");
 
-    const pixUrl = "https://pixabay.com/api/?key="+pixKey+"&q="+country+"&image_type=photo&category=places&safesearch=true";
-
-    //console.log(pixUrl);
-
-    const pixJson = await fetch(pixUrl)
+    const pixJson = await fetch(`/pix/${country}`)
     .then(res => res.json());
     //console.log(pixJson);
     
@@ -138,7 +121,7 @@ function updateUI(city, country, daysDifference, endDate, day, temp, desc, image
     image.width = width;
     image.height = height;
 
-    //remove hidden class
+    //remove hidden class to display results
     document.getElementById("bottom").classList.remove("hidden");
 }
 
