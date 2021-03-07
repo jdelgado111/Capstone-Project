@@ -25,5 +25,5 @@ Once the webpage has loaded, enter the name of a city and select the start date 
 
 This project also includes unit testing using Jest framework. To run the tests, type `npm run test`
 
-## Bugs
+## Current Issues
 To run in developer mode, type `npm run dev` then navigate to localhost:8080 in your browser. The page loads, but currently is unable to perform the required GET requests to function properly. This may be an issue that occurs due to the use of the Webpack Dev Server.
