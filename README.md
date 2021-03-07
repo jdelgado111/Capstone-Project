@@ -1,7 +1,7 @@
 # Capstone Project
 
 ## Description
-Capstone project for Udacity's Front End Web Developer Nanodegree program.
+Capstone project for Udacity's Front End Web Developer Nanodegree program in the form of a simple travel planner. Enter the name of a city and the start and end dates of your trip to receive weather data and an image of the country you're travelling to.
 
 ## Requirements
 This project runs on a local server and requires Node to run. If you don't have Node already installed on your machine, you can download it [here](https://nodejs.org/en/download/).
