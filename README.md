@@ -1,4 +1,4 @@
-# NLP-Project
+# Capstone Project
 
 ## Description
 Capstone project for Udacity's Front End Web Developer Nanodegree program.
